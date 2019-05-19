@@ -12,18 +12,27 @@ import MailBoard from './MailBoard';
 import {setInSessionStorage, getFromSessionStorage} from './utils/utils';
 import credentials from './mock/credentials';
 
+class AuthMailBoard extends Component {
 
-function AuthMailBoard() {
-  return (
-    <Router>
-      <div>
-        <AuthButton />
-        <Route exact path="/" component={Login} />
-        <Route path="/login" component={Login} />        
-        <PrivateRoute path="/mailBoard" component={MailBoard} />
-      </div>
-    </Router>
-  );
+  state = { 
+    showPane: false
+  };
+
+  render() {
+    return (
+      <Router>
+        <div>
+          <AuthButton />
+          <Route exact path="/" component={Login} />
+          <Route path="/login" component={Login} />        
+          <PrivateRoute path="/mailBoard" component={MailBoard} />
+          {/* For Github demo */}
+          <Route path="/email-dashboard/login" component={Login} />        
+          <PrivateRoute path="/email-dashboard/mailBoard" component={MailBoard} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 const fakeAuth = {
@@ -50,16 +59,17 @@ const AuthButton = withRouter(
   ({ history }) =>
     getFromSessionStorage("isAuthenticated") ? (
       <p className="user-context">
-        Welcome!
+        <span className="welcome-text"> Welcome! </span>
         <b className="logged-in-user">
         {getFromSessionStorage("loggedInUser").userName}
         </b>
         <button
+          className="logout-btn"
           onClick={() => {
             fakeAuth.signout(() => history.push("/"));
           }}
         >
-          Sign out
+          log out
         </button>
       </p>
     ) : (

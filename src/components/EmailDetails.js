@@ -22,8 +22,8 @@ const EmailDetails = ({ email, onDelete }) => {
       <div className="email-content__header">
         <h3 className="email-content__subject">{email.subject}</h3>
         {getDeleteButton()}
-        <div className="email-content__time">{date}</div>
         <div className="email-content__from">{email.from}</div>
+        <div className="email-content__time">{date}</div>
       </div>
       <div className="email-content__message">{email.message}</div>
     </div>

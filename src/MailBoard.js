@@ -3,6 +3,7 @@ import _isEmpty from 'lodash/isEmpty';
 import EmailList from './components/EmailList';
 import Sidebar from './components/Sidebar';
 import EmailDetails from './components/EmailDetails';
+import EmailHead from './components/EmailHead';
 import ComposeEmail from './components/ComposeEmail';
 
 import {getPrettyDate, getPrettyTime, getFromSessionStorage, 
@@ -43,6 +44,7 @@ class MailBoard extends React.Component {
       selectedEmailId: 0,
       currentSection: 'inbox',
       currentSectionMails: allMails,
+      showPane: false,
       emails: allMails,
       showCompose: false
     };
@@ -98,7 +100,7 @@ class MailBoard extends React.Component {
     this.setState({
       currentSection: section,
       currentSectionMails,
-      selectedEmailId,
+      selectedEmailId: currentSectionMails && currentSectionMails[0].id,
       showCompose: false
     });    
   }
@@ -135,32 +137,56 @@ class MailBoard extends React.Component {
     setInLocalStorage("sentMails", itemList);
   }
 
+  unReadCount(mails) {
+     var unreadCount = mails.reduce(function(previous, msg) {
+        if (msg.read !== "true" ) {
+          return previous + 1;
+        }
+      else {
+        return previous;
+      }
+    }.bind(this), 0);
+    return unreadCount;
+  }
+
   render() {
     const {showCompose, emails, selectedEmailId, currentSection} = this.state;
-    // const currentEmail = emails.find(x => x.id === selectedEmailId);
-
+    const currentEmail = emails.find(x => x.id === selectedEmailId);
     let currentSectionMails = this.filterEmails(currentSection);
-    const currentEmail = currentSectionMails[0];
-    const selectedEmailId1 = currentSectionMails[0].id;
+    const unReadCount = this.unReadCount(emails.filter(x => x.tag === 'inbox'));
+
+
+    const togglePane = () => {
+      this.setState({showPane: !this.state.showPane})
+    }
+    const isAuthenticated = getFromSessionStorage("isAuthenticated");
 
     return (
       <div>
+      {isAuthenticated && <div className={`left-pane ${this.state.showPane ? 'expand': ''}`}></div>}
+      <div className={`mail-container ${this.state.showPane ? 'expand': ''}`}>
+        {isAuthenticated && <span className="fa fa-align-justify toggle-pane" onClick={togglePane}/>}
         <Sidebar
           emails={emails}
-          inboxMails={emails.filter(x => x.tag === 'inbox')}
+          unReadCount={unReadCount}
           composeEmail={(val) => { this.composeEmail(val); }}
           setSidebarSection={(section) => { this.setSidebarSection(section); }} />
         <div className="inbox-container">
+          <EmailHead
+            currentSectionMails={currentSectionMails}
+            unReadCount={unReadCount}
+            currentSection={currentSection} />
           <EmailList
             emails={currentSectionMails}
             onEmailSelected={(id) => { this.openEmail(id); }}
-            selectedEmailId={selectedEmailId1}
+            selectedEmailId={selectedEmailId}
             currentSection={currentSection} />
           {!showCompose && <EmailDetails
             email={currentEmail}
             onDelete={(id) => { this.deleteMessage(id); }} />}
           {showCompose && <ComposeEmail newItemSend={this.newItemSend} />}
         </div>
+      </div>
       </div>
     )
   }
