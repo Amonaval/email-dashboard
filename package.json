@@ -1,0 +1,37 @@
+{
+  "name": "email-dashboard-app",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://amonaval.github.io/email-dashboard/",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "2.1.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "description": "Mail Dashboard",
+  "main": "index.js",
+  "devDependencies": {
+    "react-router-dom": "^5.0.0",
+    "gh-pages": "^2.0.1"
+  },
+  "author": "",
+  "license": "ISC"
+}
