@@ -6,6 +6,7 @@ import {
   Redirect,
   withRouter
 } from "react-router-dom";
+import createHistory from "history/createBrowserHistory";
 
 import mailsMock from './mock/inboxMails';
 import MailBoard from './MailBoard';
@@ -20,7 +21,7 @@ class AuthMailBoard extends Component {
 
   render() {
     return (
-      <Router>
+      <Router history={createHistory({ basename: process.env.PUBLIC_URL })}>
         <div>
           <AuthButton />
           <Route exact path="/" component={Login} />
