@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import createHistory from "history/createBrowserHistory";
 
-import mailsMock from './mock/inboxMails';
+import mailsMock from './mock/mailsMock';
 import MailBoard from './MailBoard';
 import {setInSessionStorage, getFromSessionStorage} from './utils/utils';
 import credentials from './mock/credentials';

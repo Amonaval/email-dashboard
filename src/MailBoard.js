@@ -113,12 +113,13 @@ class MailBoard extends React.Component {
      let emails = [...this.state.emails];
      const CD = new Date();
      const dateString = `${CD.getFullYear()}-${(CD.getMonth()+1)}-${CD.getDate()}`;
+     const timeString = `${CD.getHours()}:${(CD.getMinutes())}:${(CD.getSeconds())}`;
      const loggedInUser = getFromSessionStorage('loggedInUser');
      const sentItem = {
        "from": loggedInUser.emailId,
        "to": data.to,
        "address": data.to,
-       "time": `${dateString} 06:35:19`,
+       "time": `${dateString} ${timeString}`,
        "message": data.message,
        "subject": data.subject,
        "tag": "sent",
