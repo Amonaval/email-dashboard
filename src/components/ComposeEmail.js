@@ -25,7 +25,7 @@ class ComposeEmail extends Component {
   render() {
 
     return (
-      <form className="container">
+      <form className="container mail-compose">
         <div className="form-group">
           <label htmlFor="toInput" className="form-label">To: </label>
           <input
@@ -62,7 +62,7 @@ class ComposeEmail extends Component {
             placeholder={this.props.placeholder} 
           />
         </div>
-        <input type="button" onClick={this.handleEmailSend} value="Send Email" />
+        <input className="send-mail-btn" type="button" onClick={this.handleEmailSend} value="Send Email" />
       </form>
     );
   }

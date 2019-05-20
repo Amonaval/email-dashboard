@@ -18,7 +18,7 @@ const Sidebar = ({ emails, unReadCount, setSidebarSection, composeEmail }) => {
   return (
     <div id="sidebar">
       <div className="sidebar__compose">
-        <a href="#" className="btn compose" onClick={() => {composeEmail(true)}}>
+        <a className="btn compose" onClick={() => {composeEmail(true)}}>
           Compose Mail <span className="fa fa-pencil"></span>
         </a>
       </div>

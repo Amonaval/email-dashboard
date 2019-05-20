@@ -25,6 +25,7 @@
     <title>React App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-  reset/2.0/reset.min.css">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   </head>
   <style>
       @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
@@ -317,9 +318,10 @@ ul {
 }
 
 .logged-in-user{
-  font-size: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+      font-size: 18px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-transform: capitalize;
 }
 
 .green {
@@ -345,12 +347,13 @@ ul {
 }
 
 
-.search-btn, .logout-btn, .toggle-pane {
+.search-btn, .logout-btn, .toggle-pane, .send-mail-btn {
     color: #FFF;
     font-size: 14px;
     background-color: #00B494;
     padding: 2px 10px;
     margin: 6px;
+    cursor: pointer;
 }
 
 .toggle-pane {
@@ -385,6 +388,54 @@ ul {
 
 .margin10 {
   margin: 10px;
+}
+
+
+.login-container {
+    /*background-color: gray;
+    width: 500px;
+    height: 200px;
+    font-size: 20px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px; */
+    box-sizing: border-box; 
+    box-shadow: 0 2px 4px 0 rgba(181,181,181,.7);
+    width: 360px;
+    right: 10px;
+    min-height: 250px;
+    margin: 50px;
+    z-index: 1;
+    padding: 0 5px;
+    border-top: 1px solid #f1f1f5;
+}
+
+
+.login-container .form-group {
+    margin: 20px;
+}
+
+.login-container i.fa {
+    margin-right: 20px;
+}
+
+.login-container input {
+  height: 30px;
+    padding: 10px;  
+}
+
+.login-container .btn-login{
+  padding: 10px 50px;
+    font-size: 14px;
+    border: 1px solid #666;
+    background-color: #CCC;
+    cursor: pointer;
+}
+
+.mail-compose label.form-label{
+    width: 80px;
+    display: inline-block;
+    margin: 10px;
 }
 
     </style>

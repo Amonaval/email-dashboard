@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+ import React, { Component } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Link,
   Redirect,
@@ -74,7 +74,7 @@ const AuthButton = withRouter(
         </button>
       </p>
     ) : (
-      <p className="user-context">You are not logged in.</p>
+      <p className="user-context"></p>
     )
 );
 
@@ -121,22 +121,31 @@ class Login extends Component {
     if (loginSuccess) return <Redirect to={from} />;
 
     return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-          <form className="form" id="signup">
-            <input 
-              type="email" 
+      <div className="login-container">
+        <form>
+            <div class="form-group"> Already a member
+            </div>
+            <div class="form-group">
+              <i class="fa fa-user"></i>
+              <input type="text" class="form-control" 
               value={this.state.username} 
-              placeholder="Username" 
-              onChange={(e) => {this.setState({username: e.target.value})}} />
-            <input 
-              type="password" 
+              onChange={(e) => {this.setState({username: e.target.value})}}
+              placeholder="Username" required="required" />
+            </div>
+            <div class="form-group">
+              <i class="fa fa-lock"></i>
+              <input type="password" class="form-control" 
               value={this.state.password} 
-              placeholder="Password" 
-              onChange={(e) => {this.setState({password: e.target.value})}} />
-            <button type="button" id="login-button" onClick={this.login}>Login</button>
+              onChange={(e) => {this.setState({password: e.target.value})}}
+              placeholder="Password" required="required" />         
+            </div>
+            <div class="form-group">
+              <button type="button" class="btn btn-login" onClick={this.login} value="Login">
+                Login
+              </button>
+            </div>
           </form>
-      </div>
+        </div>
     );
   }
 }
