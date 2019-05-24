@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {getPrettyDate, getPrettyTime} from '../utils/utils';
 
 /* Email classes */
-const EmailListItem = ({ email, onEmailClicked, selected, currentSection }) => {
+const EmailListItem = ({ email, onEmailClicked, onEmailSelected, selected, currentSection, onEmailChecked }) => {
   let classes = "email-item";
   if (selected) {
     classes += " selected"
@@ -10,6 +10,7 @@ const EmailListItem = ({ email, onEmailClicked, selected, currentSection }) => {
     
   return (
     <div onClick={() => { onEmailClicked(email.id); }} className={classes}>
+      <div><input className="mail-checkbox" type="checkbox" checked={email.selected} onClick={(e) => { onEmailChecked(e, email.id); }} /></div>
       <div className="email-item__unread-dot" data-read={email.read}></div>
       <div className="email-item__subject truncate">{email.subject}</div>
       <div className="email-item__details">

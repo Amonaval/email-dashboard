@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const EmailHead = ({ currentSectionMails, currentSection, unReadCount }) => {
+const EmailHead = ({ currentSectionMails, currentSection, unReadCount, deleteMultiple }) => {
   
   return (
     <div className="email-head">
@@ -17,7 +17,7 @@ const EmailHead = ({ currentSectionMails, currentSection, unReadCount }) => {
           <span><span className="fa fa-refresh"></span>Refresh</span>
           <span><span className="fa fa-eye"></span></span>
           <span><span className="fa fa-exclamation"></span></span>
-          <span><span className="fa fa-trash-o"></span></span>
+          <span onClick={deleteMultiple}><span className="fa fa-trash-o"></span></span>
         </div>
         <div className="fa-btns floatR">
           <span><span className="fa fa-arrow-left"></span></span>

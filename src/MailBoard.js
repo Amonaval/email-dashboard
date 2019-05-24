@@ -69,6 +69,17 @@ class MailBoard extends React.Component {
       emails
     });
   }
+
+  selectEmail(e, id) {
+     const emails = this.state.emails;
+    const index = emails.findIndex(x => x.id === id);
+    if (e.target.checked) {
+      emails[index].selected = true;
+    } else {
+      emails[index].selected = false;
+    }
+
+  }
   
   deleteMessage(id) {
     // Mark the message as 'deleted'
@@ -88,6 +99,20 @@ class MailBoard extends React.Component {
     this.setState({
       emails,
       selectedEmailId
+    });
+  }
+
+  deleteMultiple() {
+
+    const emails = this.state.emails;
+    for (const email of emails) {
+      if (email.selected) {
+        email.tag = 'deleted';
+        email.selected = false;
+      }
+    }
+    this.setState({
+      emails
     });
   }
   
@@ -175,12 +200,14 @@ class MailBoard extends React.Component {
         <div className="inbox-container">
           <EmailHead
             currentSectionMails={currentSectionMails}
+            deleteMultiple={(id) => { this.deleteMultiple(id); }}
             unReadCount={unReadCount}
             currentSection={currentSection} />
           <EmailList
             emails={currentSectionMails}
             onEmailSelected={(id) => { this.openEmail(id); }}
             selectedEmailId={selectedEmailId}
+            onEmailChecked={(e, id) => { this.selectEmail(e, id); }}
             currentSection={currentSection} />
           {!showCompose && <EmailDetails
             email={currentEmail}
