@@ -103,16 +103,18 @@ class MailBoard extends React.Component {
   }
 
   deleteMultiple() {
-
     const emails = this.state.emails;
+
     for (const email of emails) {
       if (email.selected) {
-        email.tag = 'deleted';
-        email.selected = false;
+            email.tag = 'deleted';
+            email.selected = false;
       }
     }
+    const index = emails.findIndex(x => x.tag === this.state.currentSection);
     this.setState({
-      emails
+      emails,
+      selectedEmailId: index
     });
   }
   
@@ -137,7 +139,7 @@ class MailBoard extends React.Component {
   newItemSend(data) {
      let emails = [...this.state.emails];
      const CD = new Date();
-     const dateString = `${CD.getFullYear()}-${(CD.getMonth()+1)}-${CD.getDate()}`;
+     const dateString = `${CD.getFullYear()}-${(CD.getMonth())}-${CD.getDate()}`;
      const timeString = `${CD.getHours()}:${(CD.getMinutes())}:${(CD.getSeconds())}`;
      const loggedInUser = getFromSessionStorage('loggedInUser');
      const sentItem = {
