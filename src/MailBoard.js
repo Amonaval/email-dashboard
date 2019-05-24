@@ -71,7 +71,7 @@ class MailBoard extends React.Component {
   }
 
   selectEmail(e, id) {
-     const emails = this.state.emails;
+    const emails = this.state.emails;
     const index = emails.findIndex(x => x.id === id);
     if (e.target.checked) {
       emails[index].selected = true;
@@ -101,6 +101,7 @@ class MailBoard extends React.Component {
       selectedEmailId
     });
   }
+
 
   deleteMultiple() {
     const emails = this.state.emails;
@@ -150,6 +151,7 @@ class MailBoard extends React.Component {
        "message": data.message,
        "subject": data.subject,
        "tag": "sent",
+       "id": emails.length,
        "read": "false"
      }
     emails.unshift(sentItem);
@@ -157,6 +159,7 @@ class MailBoard extends React.Component {
     this.setState({
       emails,
       currentSection: 'sent',
+      selectedEmailId:  emails.length-1,
       showCompose: false
     });
 
