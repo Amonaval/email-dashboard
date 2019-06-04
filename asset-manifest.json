@@ -1,13 +1,13 @@
 {
   "main.css": "/email-dashboard/static/css/main.685da79a.chunk.css",
-  "main.js": "/email-dashboard/static/js/main.a680ed60.chunk.js",
-  "main.js.map": "/email-dashboard/static/js/main.a680ed60.chunk.js.map",
+  "main.js": "/email-dashboard/static/js/main.38258958.chunk.js",
+  "main.js.map": "/email-dashboard/static/js/main.38258958.chunk.js.map",
   "runtime~main.js": "/email-dashboard/static/js/runtime~main.801db0b2.js",
   "runtime~main.js.map": "/email-dashboard/static/js/runtime~main.801db0b2.js.map",
-  "static/js/2.b2db7c9c.chunk.js": "/email-dashboard/static/js/2.b2db7c9c.chunk.js",
-  "static/js/2.b2db7c9c.chunk.js.map": "/email-dashboard/static/js/2.b2db7c9c.chunk.js.map",
+  "static/js/2.71fd9f69.chunk.js": "/email-dashboard/static/js/2.71fd9f69.chunk.js",
+  "static/js/2.71fd9f69.chunk.js.map": "/email-dashboard/static/js/2.71fd9f69.chunk.js.map",
   "index.html": "/email-dashboard/index.html",
-  "precache-manifest.60c3c287a5fba0095304adc92a1e3b1b.js": "/email-dashboard/precache-manifest.60c3c287a5fba0095304adc92a1e3b1b.js",
+  "precache-manifest.7b95e5c3f78c53058feaca9fc2c71f7f.js": "/email-dashboard/precache-manifest.7b95e5c3f78c53058feaca9fc2c71f7f.js",
   "service-worker.js": "/email-dashboard/service-worker.js",
   "static/css/main.685da79a.chunk.css.map": "/email-dashboard/static/css/main.685da79a.chunk.css.map"
 }
