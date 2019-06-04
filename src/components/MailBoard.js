@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _isEmpty from 'lodash/isEmpty';
+import _bindAll from 'lodash/bindAll';
 import EmailList from './EmailList';
 import Sidebar from './Sidebar';
 import EmailDetails from './EmailDetails';
@@ -25,10 +26,10 @@ class MailBoard extends React.Component {
     for (const email of allMails) {
       email.id = id++;
     }
-  
-    this.filterEmails = this.filterEmails.bind(this);
-    this.composeEmail = this.composeEmail.bind(this);
-    this.newItemSend = this.newItemSend.bind(this);
+    
+    _bindAll(this, ['filterEmails', 'composeEmail', 'newItemSend',
+      'openEmail', 'setSidebarSection', 'deleteMultiple', 'selectEmail',
+      'deleteMessage', 'togglePane']);
 
     this.state = {
       selectedEmailId: 0,
@@ -141,8 +142,8 @@ class MailBoard extends React.Component {
     });    
   }
   
-  composeEmail(val) {
-    this.setState({showCompose: val});
+  composeEmail() {
+    this.setState({showCompose: true});
   }
 
   newItemSend(data) {
@@ -188,43 +189,43 @@ class MailBoard extends React.Component {
     return unreadCount;
   }
 
+  togglePane() {
+    this.setState({showPane: !this.state.showPane});
+  }
+
   render() {
     const {showCompose, emails, selectedEmailId, currentSection} = this.state;
     const currentEmail = emails.find(x => x.id === selectedEmailId);
     let currentSectionMails = this.filterEmails(currentSection);
     const unReadCount = this.unReadCount(emails.filter(x => x.tag === 'inbox'));
 
-
-    const togglePane = () => {
-      this.setState({showPane: !this.state.showPane})
-    }
     const isAuthenticated = getFromSessionStorage("isAuthenticated");
 
     return (
       <div>
       {isAuthenticated && <div className={`left-pane ${this.state.showPane ? 'expand': ''}`}></div>}
       <div className={`mail-container ${this.state.showPane ? 'expand': ''}`}>
-        {isAuthenticated && <span className="fa fa-align-justify toggle-pane" onClick={togglePane}/>}
+        {isAuthenticated && <span className="fa fa-align-justify toggle-pane" onClick={this.togglePane} />}
         <Sidebar
           emails={emails}
           unReadCount={unReadCount}
-          composeEmail={(val) => { this.composeEmail(val); }}
-          setSidebarSection={(section) => { this.setSidebarSection(section); }} />
+          composeEmail={this.composeEmail}
+          setSidebarSection={this.setSidebarSection} />
         <div className="inbox-container">
           <EmailHead
             currentSectionMails={currentSectionMails}
-            deleteMultiple={(id) => { this.deleteMultiple(id); }}
+            deleteMultiple={this.deleteMultiple}
             unReadCount={unReadCount}
             currentSection={currentSection} />
           <EmailList
             emails={currentSectionMails}
-            onEmailSelected={(id) => { this.openEmail(id); }}
+            openEmail={this.openEmail}
             selectedEmailId={selectedEmailId}
-            onEmailChecked={(e, id) => { this.selectEmail(e, id); }}
+            onEmailChecked={this.selectEmail}
             currentSection={currentSection} />
           {!showCompose && <EmailDetails
             email={currentEmail}
-            onDelete={(id) => { this.deleteMessage(id); }} />}
+            onDelete={this.deleteMessage} />}
           {showCompose && <ComposeEmail newItemSend={this.newItemSend} />}
         </div>
       </div>

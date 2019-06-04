@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EmailListItem from './EmailListItem';
 
 /* EmailList contains a list of Email components */
-const EmailList = ({ emails, onEmailSelected, selectedEmailId, currentSection, onEmailChecked}) => {
+const EmailList = ({ emails, openEmail, selectedEmailId, currentSection, onEmailChecked}) => {
   if (emails.length === 0) {
     return (
       <div className="email-list empty">
@@ -17,7 +17,7 @@ const EmailList = ({ emails, onEmailSelected, selectedEmailId, currentSection, o
         emails.map(email => {
           return (
             <EmailListItem
-              onEmailClicked={(id) => { onEmailSelected(id); }}
+              openEmail={openEmail}
               onEmailChecked={onEmailChecked}
               email={email}
               currentSection={currentSection}

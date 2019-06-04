@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {sideBarLabels} from '../AppConfig';
 
 /* Sidebar */
 const Sidebar = ({ emails, unReadCount, setSidebarSection, composeEmail }) => {
@@ -12,11 +13,11 @@ const Sidebar = ({ emails, unReadCount, setSidebarSection, composeEmail }) => {
         return previous;
       }
     }.bind(this), 0);
-  
+
   return (
     <div id="sidebar">
       <div className="sidebar__compose">
-        <a className="btn compose" onClick={() => {composeEmail(true)}}>
+        <a className="btn compose" onClick={composeEmail}>
           Compose Mail <span className="fa fa-pencil"></span>
         </a>
       </div>
@@ -47,14 +48,11 @@ const Sidebar = ({ emails, unReadCount, setSidebarSection, composeEmail }) => {
       </ul>
       <div className="section-title">LABELS</div>
       <ul className="sidebar__labels">
-        <li><span className="fa fa-tag"></span>Family</li>
-        <li><span className="fa fa-tag"></span>Work</li>
-        <li><span className="fa fa-tag"></span>Home</li>
-        <li><span className="fa fa-tag"></span>Children</li>
-        <li><span className="fa fa-tag"></span>Holiday</li>
-        <li><span className="fa fa-tag"></span>Music</li>
-        <li><span className="fa fa-tag"></span>Photography</li>
-        <li><span className="fa fa-tag"></span>Film</li>
+        {
+          sideBarLabels.map((item) => {
+            return <li><span className="fa fa-tag"></span>{item}</li>
+          })
+        }
       </ul>
     </div>
   );
