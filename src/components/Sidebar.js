@@ -12,9 +12,7 @@ const Sidebar = ({ emails, unReadCount, setSidebarSection, composeEmail }) => {
         return previous;
       }
     }.bind(this), 0);
-
-  // const [display, showCompose] = useState();
-
+  
   return (
     <div id="sidebar">
       <div className="sidebar__compose">

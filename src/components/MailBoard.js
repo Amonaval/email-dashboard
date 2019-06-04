@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import _isEmpty from 'lodash/isEmpty';
-import EmailList from './components/EmailList';
-import Sidebar from './components/Sidebar';
-import EmailDetails from './components/EmailDetails';
-import EmailHead from './components/EmailHead';
-import ComposeEmail from './components/ComposeEmail';
+import EmailList from './EmailList';
+import Sidebar from './Sidebar';
+import EmailDetails from './EmailDetails';
+import EmailHead from './EmailHead';
+import ComposeEmail from './ComposeEmail';
 
 import {getPrettyDate, getPrettyTime, getFromSessionStorage, 
-  getFromLocalStorage, setInLocalStorage} from './utils/utils';
+  getFromLocalStorage, setInLocalStorage} from '../utils/utils';
 
 
 /* App */
@@ -17,20 +17,10 @@ class MailBoard extends React.Component {
     
     // Assign unique IDs to the emails
     let allMails = this.props.mailsMock.mails;
-    const cachedMails = getFromLocalStorage('sentMails') || [];
-    const loggedInUser = getFromSessionStorage('loggedInUser');
-    if(!_isEmpty(cachedMails)) {
-       cachedMails.forEach((item) => {
-          if (item.to === loggedInUser.emailId || 
-             item.address === loggedInUser.emailId) {
-             item.tag = 'inbox';
-             allMails.unshift(item);
-          } else if (item.from === loggedInUser.emailId){
-             item.tag = 'sent';
-             allMails.unshift(item);
-          }
-       })
-    }
+    
+    // Fetch Saved mails & update current mail list
+    allMails = this.fetchCachedMails(allMails);
+
     let id = 0;
     for (const email of allMails) {
       email.id = id++;
@@ -52,6 +42,24 @@ class MailBoard extends React.Component {
 
   componentDidMount() {
     this.setState({currentSectionMails: this.filterEmails('inbox')})
+  }
+
+  fetchCachedMails(allMails){
+    const cachedMails = getFromLocalStorage('sentMails') || [];
+    const loggedInUser = getFromSessionStorage('loggedInUser');
+    if(!_isEmpty(cachedMails)) {
+       cachedMails.forEach((item) => {
+          if (item.to === loggedInUser.emailId || 
+             item.address === loggedInUser.emailId) {
+             item.tag = 'inbox';
+             allMails.unshift(item);
+          } else if (item.from === loggedInUser.emailId){
+             item.tag = 'sent';
+             allMails.unshift(item);
+          }
+       })
+    }
+    return allMails;
   }
 
   filterEmails(type) {
@@ -164,7 +172,7 @@ class MailBoard extends React.Component {
     });
 
     var itemList = getFromLocalStorage("sentMails") || [];
-    itemList.unshift(sentItem);
+    itemList.push(sentItem);
     setInLocalStorage("sentMails", itemList);
   }
 
